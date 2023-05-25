@@ -1,0 +1,21 @@
+{ "cars": [
+  {
+    "id": 1,
+    "image": "./public/mercedes.jpg",
+    "name": "Mercedes",
+    "price" : 29990
+  },
+  {
+    "id": 2,
+    "image": "./public/bmw.jpg",
+    "name": "BMW",
+    "price": 33670
+  },
+  {
+    "id": 3,
+    "name": "Toyota Camry",
+    "price": 24970,
+    "image": "./public/toyota.jpg"
+  }
+  ]
+}
