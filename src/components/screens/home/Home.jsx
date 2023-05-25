@@ -20,8 +20,6 @@ function Home() {
         fetchData()
     },[])
 
-    "use strict";
-
 
     return (
         <div>
