@@ -4,6 +4,7 @@ import CreateCarForm from "./create-car-form/CreateCarForm.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {CarService} from "../../../services/car.service.js";
+import {useNavigate} from "react-router-dom";
 
 
 function Home() {
@@ -17,7 +18,10 @@ function Home() {
         }
 
         fetchData()
-    },[cars])
+    },[])
+
+    "use strict";
+
 
     return (
         <div>
