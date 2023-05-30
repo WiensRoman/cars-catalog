@@ -7,29 +7,24 @@ import {CarService as carService, CarService} from "../../../services/car.servic
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../../../providers/AuthProvider.jsx";
 import {useQuery} from "@tanstack/react-query";
+import Header from "../../ui/Header.jsx";
+import Catalog from "../../ui/Catalog.jsx";
 
 
 function Home() {
     const {data, isLoading} = useQuery(['cars'],() => carService.getAll())
 
-    const {user,setUser} = useContext(AuthContext)
 
-    if(isLoading) return <p>Loading...</p>
+    if (isLoading) return <p>Loading...</p>
 
     return (
         <div>
             <h1>Cars catalog</h1>
 
-
+            <Header />
 
             <CreateCarForm/>
-                <div>
-                    {data.length ? data.map(car => (
-                    <CarItem key={car.id} car={car}/>
-                    ))
-                        : <p>Машин нет</p>
-                    }
-            </div>
+            <Catalog data={data}/>
         </div>
     )
 }
