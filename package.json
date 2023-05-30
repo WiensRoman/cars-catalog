@@ -11,9 +11,11 @@
     "server": "json-server -w server/db.cars.json -p 4200"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.29.12",
     "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-router-dom": "^6.11.2"
   },
   "devDependencies": {

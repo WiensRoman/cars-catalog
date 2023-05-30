@@ -11,5 +11,9 @@ export const CarService = {
         const response = await axios.get(`http://localhost:4200/cars?id=${id}`)
 
         return response.data[0];
+    },
+
+    async create(data) {
+        return axios.post('http://localhost:4200/cars',data)
     }
 }

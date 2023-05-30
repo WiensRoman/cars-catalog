@@ -2,57 +2,57 @@ import styles from './CreateCarForm.module.css';
 import {useState} from "react";
 import carItem from "../car-item/CarItem.jsx";
 import CarItem from "../car-item/CarItem.jsx";
+import {useForm} from "react-hook-form";
+import {CarService} from "../../../../services/car.service.js";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 
-const clearData  = {
-    price: '',
-    image: '',
-    name: ''
-}
+const CreateCarForm = () => {
+    const {register, handleSubmit, reset, formState: {errors}} = useForm({
+        mode: 'onChange',
+    })
 
-const CreateCarForm = ({setCars}) => {
-    const [data, setData] = useState(clearData)
+    const queryClient = useQueryClient()
 
-    const createCar = e => {
-        e.preventDefault();
-        console.log(data.name,data.price,data.image)
-        setCars(prev => [
-            {
-                id:prev.length + 1,
-            ...data
-        },
-            ...prev
-        ])
+    const {mutate} = useMutation(['create car'],
+            data => CarService.create(data),
+        {
+        onSuccess: () => {
+            queryClient.invalidateQueries('cars')
+            reset()
+        }
+    }
+    )
 
-        setData(clearData);
+    const createCar = data => {
+        mutate(data)
     }
 
     return (
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(createCar)}>
             <input
+                {...register('name', {required: "Name is required!"})}
                 placeholder='Name'
-                onChange={e => setData(prev => ({
-                        ...prev,
-                        name: e.target.value })
-                )}
-                value={data.name}
-            />
-            <input
-                placeholder='Price'
-                onChange={e => setData(prev => ({
-                    ...prev,
-                    price: e.target.value })
-                )}
-                value={data.price}/>
-            <input
-                placeholder='Image'
-                onChange={e => setData(prev => ({
-                    ...prev,
-                    image: e.target.value })
-                )}
-                value={data.image}
             />
 
-            <button className= 'btn' onClick={e => createCar(e)}>Create</button>
+            {errors?.name?.message && (
+                <p
+                    style={{
+                    color: 'red',
+            }}
+                >
+                    Name is required
+                </p>
+            )}
+            <input
+                {...register('price', {required: true})}
+                placeholder='Price'
+            />
+            <input
+                {...register('image', {required: true})}
+                placeholder='Image'
+            />
+
+            <button className= 'btn'>Create</button>
         </form>
     );
 };

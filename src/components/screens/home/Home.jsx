@@ -1,32 +1,30 @@
 import styles from './Home.module.css'
 import CarItem from "./car-item/CarItem.jsx";
 import CreateCarForm from "./create-car-form/CreateCarForm.jsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {CarService} from "../../../services/car.service.js";
+import {CarService as carService, CarService} from "../../../services/car.service.js";
 import {useNavigate} from "react-router-dom";
+import {AuthContext} from "../../../providers/AuthProvider.jsx";
+import {useQuery} from "@tanstack/react-query";
 
 
 function Home() {
-    const [cars, setCars] = useState([])
+    const {data, isLoading} = useQuery(['cars'],() => carService.getAll())
 
-    useEffect(()=>{
-        const fetchData = async () => {
-            const data = await CarService.getAll();
+    const {user,setUser} = useContext(AuthContext)
 
-            setCars(data)
-        }
-
-        fetchData()
-    },[])
-
+    if(isLoading) return <p>Loading...</p>
 
     return (
         <div>
-                <h1>Cars catalog</h1>
-            <CreateCarForm setCars={setCars}/>
+            <h1>Cars catalog</h1>
+
+
+
+            <CreateCarForm/>
                 <div>
-                    {cars.length ? cars.map(car => (
+                    {data.length ? data.map(car => (
                     <CarItem key={car.id} car={car}/>
                     ))
                         : <p>Машин нет</p>

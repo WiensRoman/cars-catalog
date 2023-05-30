@@ -4,9 +4,18 @@ import './assets/styles/global.css'
 import Home from './components/screens/home/Home.jsx'
 import './fonts/Golos/GolosText-Black.ttf'
 import Router from "./components/Router.jsx";
+import AuthProvider from "./providers/AuthProvider.jsx";
+import {QueryClient,QueryClientProvider} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Router />
+      <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+              <Router />
+          </AuthProvider>
+      </QueryClientProvider>
+
   </React.StrictMode>,
 )
