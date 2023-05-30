@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {FC} from 'react';
 
-const ErrorMessage = ({error}) => {
-    if(!error) return null;
+const ErrorMessage: FC<{ error: string; }> = ({error}) => {
+    if (!error) return null;
     return (
         <p
             style={{

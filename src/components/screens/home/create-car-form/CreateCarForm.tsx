@@ -1,15 +1,21 @@
 import styles from './CreateCarForm.module.css';
 import {useState} from "react";
-import carItem from "../car-item/CarItem.jsx";
-import CarItem from "../car-item/CarItem.jsx";
+import carItem from "../car-item/CarItem.tsx";
+import CarItem from "../car-item/CarItem.tsx";
 import {useForm} from "react-hook-form";
-import {CarService} from "../../../../services/car.service.js";
+import {CarService} from "../../../../services/car.service.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import ErrorMessage from "./ErrorMessage.jsx";
-import useCreateCar from "./useCreateCar.js";
+import ErrorMessage from "./ErrorMessage.tsx";
+import useCreateCar from "./useCreateCar.ts";
+import {ICarData} from "../../../../types/car.interface";
 
 const CreateCarForm = () => {
-    const {register, handleSubmit, reset, formState: {errors}} = useForm({
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: {errors}
+    } = useForm<ICarData>({
         mode: 'onChange',
     })
 

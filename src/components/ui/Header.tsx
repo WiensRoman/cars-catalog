@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAuth} from "../../hooks/useAuth.jsx";
+import {useAuth} from "../../hooks/useAuth";
 
 
 const Header = () => {

@@ -1,14 +1,14 @@
 import styles from './Home.module.css'
-import CarItem from "./car-item/CarItem.jsx";
-import CreateCarForm from "./create-car-form/CreateCarForm.jsx";
+import CarItem from "./car-item/CarItem";
+import CreateCarForm from "./create-car-form/CreateCarForm";
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {CarService as carService, CarService} from "../../../services/car.service.js";
+import {CarService as carService, CarService} from "../../../services/car.service.ts";
 import {useNavigate} from "react-router-dom";
-import {AuthContext} from "../../../providers/AuthProvider.jsx";
+import {AuthContext} from "../../../providers/AuthProvider";
 import {useQuery} from "@tanstack/react-query";
-import Header from "../../ui/Header.jsx";
-import Catalog from "../../ui/Catalog.jsx";
+import Header from "../../ui/Header";
+import Catalog from "../../ui/Catalog";
 
 
 function Home() {

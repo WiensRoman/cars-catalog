@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
-import {CarService} from "../../../services/car.service.js";
-import CarItem from "../home/car-item/CarItem.jsx";
+import {CarService} from "../../../services/car.service.ts";
+import CarItem from "../home/car-item/CarItem";
+import {ICar} from "../../../types/car.interface";
 
 
 const CarDetail = () => {
 
     const {id} = useParams()
-        const [car,setCar] = useState({})
+        const [car,setCar] = useState<ICar>({} as ICar)
 
 
     useEffect(()=>{

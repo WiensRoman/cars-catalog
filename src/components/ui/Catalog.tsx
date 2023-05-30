@@ -1,7 +1,12 @@
-import React from 'react';
-import CarItem from "../screens/home/car-item/CarItem.jsx";
+import React, {FC} from 'react';
+import CarItem from "../screens/home/car-item/CarItem.tsx";
+import {ICar} from "../../types/car.interface";
 
-const Catalog = ({data}) => {
+interface ICatalog {
+    data?: ICar[]
+}
+
+const Catalog: FC<ICatalog> = ({data = []}) => {
     return (
         <div>
             {data.length ? data.map(car => (
